@@ -138,7 +138,7 @@ describe('ScenarioParser', function () {
     });
   });
 
-  it.only('should split info sections inside Scenario', function(done) {
+  it('should split info sections inside Scenario', function(done) {
 
     var mdText = fetchScenario('info_inside_scenario_section.md');
 
