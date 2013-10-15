@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+// vim: ft=javascript
+
+'use strict';
+
+var program = require('commander');
+var Parser = require('../lib/parser');
+var version = require('../lib/version');
+var fs = require('fs');
+
+program
+  .version(version) // set the version
+  .parse(process.argv); //parse the arguments
+
+// Override the description to include the filename
+program._name = 'st-parser filename'
+
+var content = '';
+
+// Check if we get the file via stdin
+if (!process.stdin.isTTY) {
+
+  // Start the input
+  process.stdin.setEncoding('utf-8');
+  process.stdin.resume()
+
+  // Read the input
+  process.stdin.on('data', function(data) {
+    content = content
+  });
+
+  process.stdin.on('end', function() {
+  });
+
+} else {
+  // Filename is third argument
+  var filename = process.argv[2];
+
+  if (filename === undefined) {
+    program.help();
+    process.exit(-1);
+  } else {
+    try {
+      content = fs.readFileSync(filename, 'utf-8');
+    } catch (e) {
+      console.log(e.toString());
+      process.exit(-1);
+    }
+  }
+}
+
+// Now we got content, time to parse
+var parser = new Parser();
+parser.parse(content, function(err, scenario, parserState) {
+  console.log(parserState);
+  console.log(JSON.stringify(scenario, null, '  '));
+
+});
