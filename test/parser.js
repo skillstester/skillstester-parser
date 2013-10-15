@@ -165,4 +165,20 @@ describe('ScenarioParser', function () {
     });
   });
 
+  it('should add a codeblock if one expects it', function(done) {
+
+    var mdText = fetchScenario('action_with_codeblock.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).to.be.empty();
+      expect(parserState.warnings).to.be.empty();
+      var action = scenario.actions[0];
+
+      expect(action.params.command).to.equal('ls -l');
+
+      done();
+    });
+  });
+
 });
