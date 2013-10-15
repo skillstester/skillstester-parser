@@ -76,6 +76,8 @@ Any action defined in a h3. block `Solution` will only be executed on request or
   hardware: [],
   scenario: []
 }
+```
+
 
 ## Action types
 Known action types are:
