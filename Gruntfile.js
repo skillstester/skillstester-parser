@@ -124,7 +124,7 @@ module.exports = function(grunt) {
           changelog_version_prefix: 'v',
           changelog_insert_before: null,
           banner: null,
-          has_travis: false,
+          has_travis: true,
           github_username: "skillstester",
           travis_branch: "master",
           generate_footer: false,

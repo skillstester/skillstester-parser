@@ -1,4 +1,5 @@
 # skillstester-parser 
+[![Build Status](https://secure.travis-ci.org/skillstester/skillstester-parser.png?branch=master)](http://travis-ci.org/skillstester/skillstester-parser)
 
 > Parser for skillstester (markdown) challenges
 
@@ -99,6 +100,5 @@ Checks extend action types with criteria to check if success full or not
 - Explain combo types
 - Figure out merging of attributes
 - aliasing elements
-
 
 
