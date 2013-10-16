@@ -91,14 +91,13 @@ describe('ScenarioParser', function () {
     });
   });
 
-  it('should warn on incorrect special inside Scenario/Task', function(done) {
+  it('should error on incorrect special inside Scenario/Task', function(done) {
 
     var mdText = fetchScenario('incorrect_special_inside_task.md');
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).not.to.be.empty();
+      expect(parserState.errors).not.to.be.empty();
       expect(scenario.tasks).not.to.be.empty();
 
       done();
@@ -214,7 +213,7 @@ describe('ScenarioParser', function () {
     });
   });
 
-  it('should detect a non-existing special', function(done) {
+  it('should error on a non-existing refererenced special', function(done) {
 
     var mdText = fetchScenario('missing_special_definition.md');
 
@@ -224,5 +223,61 @@ describe('ScenarioParser', function () {
       done();
     });
   });
+
+  it('should remove quotes from special options', function(done) {
+
+    var mdText = fetchScenario('quoted_option_action.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(scenario.actions[0].params.command).to.be('this is a test');
+      done();
+    });
+  });
+
+  it.skip('should error on empty task headers', function(done) {
+
+    var mdText = fetchScenario('empty_task_header.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).not.to.be.empty();
+      done();
+    });
+  });
+
+  it('should error on unknown special type', function(done) {
+
+    var mdText = fetchScenario('unknown_special_type.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).not.to.be.empty();
+      done();
+    });
+  });
+
+  it('should warn on special type without a colon', function(done) {
+
+    var mdText = fetchScenario('special_without_colon.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.warnings).not.to.be.empty();
+      done();
+    });
+  });
+
+  it('should warn on special definition with key with space', function(done) {
+
+    var mdText = fetchScenario('special_definition_with_space.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.warnings).not.to.be.empty();
+      done();
+    });
+  });
+
 
 });
