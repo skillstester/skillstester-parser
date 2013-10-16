@@ -11,7 +11,7 @@ A user typically consists of a:
 - primary group: integer that is the group id
 
 ### Exercise:
-- @setting: [An ubuntu user](#settings-ubuntu-user)
+-> @setting: [An ubuntu user](#settings-ubuntu-user)
 
 [An ubuntu user](#settings-ubuntu-user)
 [An ubuntu user](http://vlablal.com#settings-ubuntu-user)
@@ -29,7 +29,7 @@ Let's see if you can create a user ubuntu with:
 
 I'll be waiting until you finish the job ...
 
-- @check: [Is user created?](#check-user-created)
+-> @check: [Is user created?](#check-user-created)
 
 Related resources are:
 - [User Resource Provider](http://docs.opscode.com/resource_user.html)
@@ -38,7 +38,7 @@ Related resources are:
 
 ### Solution:
 
-- @action: [Create user with chef](#action-user-create)
+-> @action: [Create user with chef](#action-user-create)
 
 # Actions
 ## action-user-create

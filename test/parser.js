@@ -181,4 +181,19 @@ describe('ScenarioParser', function () {
     });
   });
 
+  it('should add a textblock if one expects it', function(done) {
+
+    var mdText = fetchScenario('text_block.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).to.be.empty();
+      expect(parserState.warnings).to.be.empty();
+      var textBlock = scenario.tasks[0].run_list;
+      expect(scenario.tasks[0].run_list.length).to.be(5);
+
+      done();
+    });
+  });
+
 });
