@@ -53,8 +53,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
 
       expect(scenario.tasks).not.to.be.empty();
       expect(scenario.tasks[0].run_list).not.to.be.empty();
@@ -82,8 +80,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
       expect(scenario.tasks).not.to.be.empty();
       var run_list = scenario.tasks[0].run_list;
       expect(run_list).not.to.be.empty();
@@ -142,8 +138,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
       expect(scenario.tasks).to.not.be.empty();
       //expect(scenario.actions).to.not.be.empty();
       var action = scenario.actions[0];
@@ -185,8 +179,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
       var textBlock = scenario.tasks[0].run_list;
       expect(scenario.tasks[0].run_list.length).to.be(5);
 
@@ -200,8 +192,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
       expect(scenario.tasks[0].run_list.length).to.be(4);
       done();
     });
@@ -213,8 +203,6 @@ describe('ScenarioParser', function () {
 
     parser.parse(mdText,function(err,scenario, parserState) {
       expect(err).to.be(null);
-      expect(parserState.errors).to.be.empty();
-      expect(parserState.warnings).to.be.empty();
       expect(scenario.tasks[0].run_list.length).to.be(4);
       // The first 2 run_list items are not part of a solution block
       expect(scenario.tasks[0].run_list[0].solution).not.to.be(true);
@@ -222,6 +210,17 @@ describe('ScenarioParser', function () {
       // Last 2 run_list items are part of a solution block
       expect(scenario.tasks[0].run_list[2].solution).to.be(true);
       expect(scenario.tasks[0].run_list[3].solution).to.be(true);
+      done();
+    });
+  });
+
+  it('should detect a non-existing special', function(done) {
+
+    var mdText = fetchScenario('missing_special_definition.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).not.to.be.empty();
       done();
     });
   });
