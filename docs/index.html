@@ -87,7 +87,7 @@
 </ul>
 <h2>Linking elements inside a scenario</h2>
 <p>To reference an element inside the scenario you can use the following syntax
-<code>- @&lt;special-type&gt;: [a description](#&lt;reference-to-special-definition&gt;)</code></p>
+<code>-&gt; @&lt;special-type&gt;: [a description](#&lt;reference-to-special-definition&gt;)</code></p>
 <p>Known special-types are:
 - action: this will contain a block that will execute something
 - check: a check that will be executed
@@ -95,8 +95,8 @@
 <p>A &lt;reference-to-special-definition&gt; can contain any characters.
 But if you avoid spaces or '.', github will create autolink to your subsection elements.</p>
 <p>Example:</p>
-<pre><code>- @check: [A simple check](#simple-check-element)
-- @action: [A simple check](#simple-action-element)</code></pre>
+<pre><code>-&gt; @check: [A simple check](#simple-check-element)
+-&gt; @action: [A simple check](#simple-action-element)</code></pre>
 <h2>Defining a special element</h2>
 <p>A h2. level element will define the <code>id</code> of the element you can refer to</p>
 <p>Any list-item element of the form <code>key</code>: <code>value</code> will result in parameter</p>

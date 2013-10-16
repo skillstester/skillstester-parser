@@ -34,7 +34,7 @@ A scenario file consists of multiple Sections. Each Section is specified as leve
 
 ## Linking elements inside a scenario
 To reference an element inside the scenario you can use the following syntax
-`- @<special-type>: [a description](#<reference-to-special-definition>)`
+`-> @<special-type>: [a description](#<reference-to-special-definition>)`
 
 Known special-types are:
 - action: this will contain a block that will execute something
@@ -46,8 +46,8 @@ But if you avoid spaces or '.', github will create autolink to your subsection e
 
 Example:
 ```
-- @check: [A simple check](#simple-check-element)
-- @action: [A simple check](#simple-action-element)
+-> @check: [A simple check](#simple-check-element)
+-> @action: [A simple check](#simple-action-element)
 ```
 
 ## Defining a special element
