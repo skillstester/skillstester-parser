@@ -196,4 +196,17 @@ describe('ScenarioParser', function () {
     });
   });
 
+  it('should detect multiple specials grouped together', function(done) {
+
+    var mdText = fetchScenario('specials_grouped.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).to.be.empty();
+      expect(parserState.warnings).to.be.empty();
+      expect(scenario.tasks[0].run_list.length).to.be(4);
+      done();
+    });
+  });
+
 });
