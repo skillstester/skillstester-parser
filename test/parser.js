@@ -24,7 +24,6 @@ describe('ScenarioParser', function () {
       expect(scenario.hardware).to.be.empty();
       expect(scenario.checks).to.be.empty();
       expect(scenario.tasks).to.be.empty();
-      expect(scenario.run_list).to.be.empty();
       expect(err).to.be(null);
       expect(parserState.errors).to.be.empty();
       expect(parserState.warnings).to.be.empty();
@@ -41,7 +40,6 @@ describe('ScenarioParser', function () {
       expect(scenario.hardware).to.be.empty();
       expect(scenario.checks).to.be.empty();
       expect(scenario.tasks).to.be.empty();
-      expect(scenario.run_list).to.be.empty();
       expect(err).to.be(null);
       expect(parserState.errors).to.be.empty();
       expect(parserState.warnings).to.be.empty();
@@ -205,6 +203,25 @@ describe('ScenarioParser', function () {
       expect(parserState.errors).to.be.empty();
       expect(parserState.warnings).to.be.empty();
       expect(scenario.tasks[0].run_list.length).to.be(4);
+      done();
+    });
+  });
+
+  it('should detect a solution block', function(done) {
+
+    var mdText = fetchScenario('solution_block.md');
+
+    parser.parse(mdText,function(err,scenario, parserState) {
+      expect(err).to.be(null);
+      expect(parserState.errors).to.be.empty();
+      expect(parserState.warnings).to.be.empty();
+      expect(scenario.tasks[0].run_list.length).to.be(4);
+      // The first 2 run_list items are not part of a solution block
+      expect(scenario.tasks[0].run_list[0].solution).not.to.be(true);
+      expect(scenario.tasks[0].run_list[1].solution).not.to.be(true);
+      // Last 2 run_list items are part of a solution block
+      expect(scenario.tasks[0].run_list[2].solution).to.be(true);
+      expect(scenario.tasks[0].run_list[3].solution).to.be(true);
       done();
     });
   });
